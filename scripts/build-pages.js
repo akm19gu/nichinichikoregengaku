@@ -27,6 +27,7 @@ const LANGS = {
   ja: {
     dir: "",
     site: "日々是衒学",
+    siteHtml: '日々是衒学<span class="appbar-reading">にちにちこれげんがく</span>',
     tagline: "毎日ひとつ、知ると世界の見え方が少し変わる言葉を。",
     plain: (s) => esc(s),
     termHtml: (s) => termHtml(s),
@@ -56,6 +57,7 @@ const LANGS = {
   en: {
     dir: "en/",
     site: "Know-It-All Daily",
+    siteHtml: "Know-It-All Daily",
     tagline: "One word a day for the gloriously pedantic.",
     plain: (s) => esc(s),
     termHtml: (s) => esc(s),
@@ -235,7 +237,7 @@ function wordPage(lang, words, i) {
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
       <span>${L.back}</span>
     </a>
-    <a class="appbar-title" href="${app}">${L.site}</a>
+    <a class="appbar-title" href="${app}">${L.siteHtml}</a>
   </header>
 
   <main class="view">
@@ -331,7 +333,7 @@ ${items}
 <body>
 <div class="app" lang="${lang}">
   <header class="appbar">
-    <a class="appbar-title" href="../">${L.site}</a>
+    <a class="appbar-title" href="../">${L.siteHtml}</a>
   </header>
 
   <main class="view">
