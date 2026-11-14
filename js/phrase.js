@@ -121,23 +121,38 @@
     });
   }
 
-  function fill(el, phrases) {
-    el.replaceChildren();
-    let first = true;
+  // 文節の並びを、改行してよい位置（wbr）・一行に保つかたまり（span）・そのままの文字に分ける
+  function tokens(phrases) {
+    const result = [];
     for (const phrase of phrases) {
       for (const piece of pieces(phrase)) {
-        if (!first) el.append(document.createElement("wbr"));
-        first = false;
-        if (piece.length <= KEEP_WHOLE) {
-          const span = document.createElement("span");
-          span.className = piece.length > LONG ? "ph ph-long" : "ph";
-          span.textContent = piece;
-          el.append(span);
-        } else {
-          el.append(piece);
-        }
+        if (result.length) result.push({ wbr: true });
+        if (piece.length <= KEEP_WHOLE) result.push({ text: piece, cls: piece.length > LONG ? "ph ph-long" : "ph" });
+        else result.push({ text: piece });
       }
     }
+    return result;
+  }
+
+  function fill(el, phrases) {
+    el.replaceChildren(
+      ...tokens(phrases).map((t) => {
+        if (t.wbr) return document.createElement("wbr");
+        if (!t.cls) return t.text;
+        const span = document.createElement("span");
+        span.className = t.cls;
+        span.textContent = t.text;
+        return span;
+      })
+    );
+  }
+
+  // 静的なページ（scripts/build-pages.js）用に、同じ区切りを HTML の文字列で返す
+  const escape = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  function html(phrases) {
+    return tokens(phrases)
+      .map((t) => (t.wbr ? "<wbr>" : t.cls ? `<span class="${t.cls}">${escape(t.text)}</span>` : escape(t.text)))
+      .join("");
   }
 
   const api = {
@@ -147,6 +162,8 @@
     pieces,
     setText: (el, text) => fill(el, textPhrases(text || "")),
     setTerm: (el, term) => fill(el, termPhrases(term || "")),
+    textHtml: (text) => html(textPhrases(text || "")),
+    termHtml: (term) => html(termPhrases(term || "")),
   };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.HibiPhrase = api;

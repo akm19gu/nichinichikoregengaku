@@ -511,3 +511,18 @@ svg {
   color: var(--seal, var(--accent));
   font-weight: 600;
 }
+
+/* ---- 言葉ごとの静的なページ（scripts/build-pages.js が書き出す w/ と en/w/） ---- */
+a.appbar-title, a.appbar-back { text-decoration: none; }
+a.appbar-title { color: inherit; }
+.page-cta {
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  text-align: center;
+  color: var(--muted);
+  font-size: var(--step--1);
+  padding-block: 6px;
+}
+.page-cta .pill-btn { text-decoration: none; }
+.page-neighbors, .page-genre { padding-top: 8px; margin-bottom: -6px; }

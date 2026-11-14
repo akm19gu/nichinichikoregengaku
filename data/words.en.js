@@ -4631,7 +4631,31 @@
     },
   };
 
-  const api = { WORDS };
+  // ジャンル名の英語（キーは data/words.js の GENRES）
+  const GENRES = {
+    "歴史": "History",
+    "社会": "Society",
+    "心理": "Psychology",
+    "哲学・思考": "Philosophy",
+    "文学": "Literature",
+    "芸術": "Art & Film",
+    "宗教・神話": "Religion & Myth",
+    "科学": "Science",
+    "数理・情報": "Math & Computing",
+    "言葉": "Language",
+    "建築・都市": "Architecture & Cities",
+    "医学・からだ": "Medicine & Body",
+    "政治・法": "Politics & Law",
+    "経済・お金": "Economics & Money",
+    "音楽": "Music",
+    "食": "Food",
+    "地理・地球": "Geography & Earth",
+    "生き物": "Living Things",
+    "宇宙": "Space",
+    "技術・発明": "Technology",
+  };
+
+  const api = { WORDS, GENRES };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.HibiWordsEn = api;
 })(typeof self !== "undefined" ? self : this);

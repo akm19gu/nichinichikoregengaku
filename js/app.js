@@ -11,28 +11,7 @@
     ? JA_WORDS.map((w) => (EN[w.id] ? { ...EN[w.id], id: w.id, genre: w.genre } : { id: w.id, genre: w.genre, missing: true }))
     : JA_WORDS;
   const ready = (w) => !w.missing;
-  const GENRE_EN = {
-    "歴史": "History",
-    "社会": "Society",
-    "心理": "Psychology",
-    "哲学・思考": "Philosophy",
-    "文学": "Literature",
-    "芸術": "Art & Film",
-    "宗教・神話": "Religion & Myth",
-    "科学": "Science",
-    "数理・情報": "Math & Computing",
-    "言葉": "Language",
-    "建築・都市": "Architecture & Cities",
-    "医学・からだ": "Medicine & Body",
-    "政治・法": "Politics & Law",
-    "経済・お金": "Economics & Money",
-    "音楽": "Music",
-    "食": "Food",
-    "地理・地球": "Geography & Earth",
-    "生き物": "Living Things",
-    "宇宙": "Space",
-    "技術・発明": "Technology",
-  };
+  const GENRE_EN = (window.HibiWordsEn && window.HibiWordsEn.GENRES) || {};
   const genreName = (g) => (EN ? GENRE_EN[g] || g : g);
   // 英語は文節の処理をせず、そのまま入れる
   const put = EN ? (el, text) => { el.textContent = text; } : setText;

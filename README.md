@@ -31,7 +31,7 @@ GitHub Pages などで公開したページを開き、ホーム画面に追加�
 
 ## 開発
 
-ビルドは不要です。
+アプリ本体にビルドは不要です。語彙を直したときだけ、検索エンジン向けのページを書き出し直します（下の「検索エンジン向けのページ」）。
 
 ```sh
 npm install # テスト用の形態素解析（kuromoji）を入れる
@@ -49,6 +49,21 @@ npm test    # 日付計算・文節の区切り・語彙データの検査
 日本語は文節ごとに `<wbr>` を入れ、CSS の `word-break: keep-all` で単語の途中では折り返さないようにしています。文節の区切りには Google の [BudouX](https://github.com/google/budoux)（Apache License 2.0）を `js/vendor/budoux-ja.js` に同梱して使っています。見出し語はさらに、「・」「＝」「／」の後と助詞「の」「と」「は」「を」「も」の後だけで折り返し、一行に収まらない場合は文字を少し小さくします。
 
 BudouX は「投げ落と｜される」のように単語の途中で区切ることがあるので、そうなる語を `js/phrase.js` の `KEEP_TOGETHER` に並べて、その内側では折り返さないようにしています。`npm test` は形態素解析（kuromoji）で全語彙の区切りを調べ、単語の途中で区切っている箇所があれば、足すべき語を表示して失敗します。
+
+### 検索エンジン向けのページ
+
+アプリは `#w-<id>` のようなハッシュで画面を切り替えるので、そのままでは検索エンジンからトップの2ページしか見えません。そこで `scripts/build-pages.js` が、語ごとの静的なページを書き出しています。
+
+- `w/<id>/`・`en/w/<id>/`：語ごとのページ（題名・説明・正規URL・日英の対応・構造化データ入り）
+- `w/`・`en/w/`：全語の一覧（ジャンル別）
+- `sitemap.xml`・`robots.txt`
+- `index.html`・`en/index.html` の `<!-- seo:start -->` 〜 `<!-- seo:end -->`
+
+```sh
+node scripts/build-pages.js
+```
+
+`data/words.js`・`data/words.en.js` を直したら実行してください。古いままだと `npm test` が失敗します。公開URLを変えたら、スクリプト冒頭の `SITE` を書き換えて実行し直します。
 
 ## 語の選び方
 
@@ -88,5 +103,10 @@ js/phrase.js           日本語を文節で区切って <wbr> を入れる
 js/vendor/budoux-ja.js 文節の区切り（BudouX）
 js/app.js              画面の描画と操作
 data/words.js          語彙データ
+data/words.en.js       英語版（Know-It-All Daily）の本文とジャンル名
+en/                    英語版の画面
+scripts/build-pages.js 検索エンジン向けのページを書き出す
+w/  en/w/              書き出した語ごとのページ（手で直さない）
+sitemap.xml robots.txt 書き出した検索エンジン向けのファイル
 test/                  node:test によるテスト
 ```

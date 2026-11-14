@@ -13,14 +13,28 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-<link rel="alternate" hreflang="ja" href="./">
-<link rel="alternate" hreflang="en" href="en/">
+<!-- seo:start -->
+<link rel="canonical" href="https://nichinichikoregengaku.akm7339gil.workers.dev/">
+<link rel="alternate" hreflang="ja" href="https://nichinichikoregengaku.akm7339gil.workers.dev/">
+<link rel="alternate" hreflang="en" href="https://nichinichikoregengaku.akm7339gil.workers.dev/en/">
+<link rel="alternate" hreflang="x-default" href="https://nichinichikoregengaku.akm7339gil.workers.dev/en/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="日々是衒学">
+<meta property="og:title" content="日々是衒学">
+<meta property="og:description" content="毎日ひとつ、知ると世界の見え方が少し変わる言葉を。">
+<meta property="og:url" content="https://nichinichikoregengaku.akm7339gil.workers.dev/">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"日々是衒学","alternateName":"にちにちこれげんがく","description":"毎日ひとつ、知ると世界の見え方が少し変わる言葉を。","url":"https://nichinichikoregengaku.akm7339gil.workers.dev/","inLanguage":"ja"}</script>
+<!-- seo:end -->
 <script>
   // 日本語を使っていない端末で初めて開いたら、英語版へ案内する。
   // 画面の言語リンクで選び直したあとは、その選択に従う。ホーム画面から開いたときは動かさない。
   (function () {
     try {
       if (window.self !== window.top) return;
+      // 検索エンジンには日本語版をそのまま見せる
+      if (/bot|crawl|spider|slurp|facebookexternalhit|embedly|preview/i.test(navigator.userAgent)) return;
       if (matchMedia("(display-mode: standalone)").matches || navigator.standalone) return;
       var saved = JSON.parse(localStorage.getItem("nichinichikoregengaku.lang"));
       var langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""];
@@ -134,6 +148,7 @@
         <li data-phrase>教科書っぽすぎない（囚人のジレンマやシュレーディンガーの猫ほど有名なものは外す）</li>
       </ul>
     </section>
+    <p class="lang-switch"><a href="w/">すべての言葉の意味と由来（一覧ページ）</a></p>
     <p class="lang-switch"><a href="en/" data-lang-switch="en" lang="en">Read in English: Know-It-All Daily</a></p>
   </main>
 

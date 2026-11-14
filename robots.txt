@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nichinichikoregengaku.akm7339gil.workers.dev/sitemap.xml

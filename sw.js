@@ -1,6 +1,6 @@
 // オフラインでも開けるようにするためのサービスワーカー。
 // アプリ本体はネットワーク優先（更新がすぐ届く）、フォントはキャッシュ優先。
-const CACHE = "nichinichikoregengaku-v7";
+const CACHE = "nichinichikoregengaku-v8";
 const SHELL = [
   "./",
   "index.html",
